@@ -1,0 +1,44 @@
+This is a Sample Certification Authority using openssl. This Authority 
+consists in some sample scripts and is usefull for others as well,
+oder so
+
+
+Um einen neuen request zu generieren benutzt du:
+
+openssl req -newkey rsa:4096 -keyout key.pem -out req.pem
+Wichtisch Organisation Name muss "president.eu.org" sein!!!!!
+
+
+#################################################################
+# enterprise key erzeugung 
+#################################################################
+cdirect@zvadm1:/opt/cdirect/CA > openssl pkcs8 -topk8 -in certs/enterprise.pem  -in private/enterprise.pem  -out enterprise.pkcs 
+Enter Encryption Password:
+Verifying - Enter Encryption Password:
+cdirect@zvadm1:/opt/cdirect/CA > cat enterprise.pkcs 
+
+
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+cdirect@zvadm1:/opt/cdirect/CA > openssl pkcs12 -export -in certs/client.pem  -inkey private/client.pem  
+Enter pass phrase for private/client.pem:
+aborted!
+unable to load private key
+cdirect@zvadm1:/opt/cdirect/CA > openssl pkcs12 -export -in certs/client.pem  -inkey private/client.pem  -out client-ent.pfx
+Enter pass phrase for private/client.pem:
+Enter Export Password:
+Verifying - Enter Export Password:
+Verify failure
+Can't read Password
+cdirect@zvadm1:/opt/cdirect/CA > openssl pkcs12 -export -in certs/client.pem  -inkey private/client.pem  -out client-ent.pfx
+Enter pass phrase for private/client.pem:
+aborted!
+unable to load private key
+cdirect@zvadm1:/opt/cdirect/CA > openssl pkcs12 -export -in certs/client.pem  -inkey private/client.pem  -out client-ent.pfx
+Enter pass phrase for private/client.pem:
+Enter Export Password:
+Verifying - Enter Export Password:
+
+
